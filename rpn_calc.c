@@ -6,7 +6,7 @@
 /*   By: npanday <npanday@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/20 16:52:11 by npanday        #+#    #+#                */
-/*   Updated: 2019/05/21 10:53:42 by npanday       ########   odam.nl         */
+/*   Updated: 2019/05/21 11:33:01 by npanday       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static int	i = 0;
 
-static char	error = 0;
+static char	error;
 
 static int	is_op(char c)
 {
@@ -42,17 +42,20 @@ static int	rpn_calc(char *str, char op)
 	while (i > 0 && !error)
 	{
 		i--;
-		if (str[i] == ' ')
-			if (num)
-				return (atoi(str + i + 1));
-		else if (str[i] >= '0' && str[i] <= '9')
+		if (num && str[i] == ' ')
+			return (atoi(str + i + 1));
+		else if (isdigit(str[i]))
 			num = 1;
 		else if (is_op(str[i]))
 			return (process());
-		else
+		else if (str[i] != ' ')
 			error = 1;
 	}
-	if (i == 0 && )
+	if (i == 0 && !isdigit(str[i]))
+		error = 1;
+	if (error)
+		return (0);
+	return (atoi(str + i));
 }
 
 int			main(int argc, char **argv)
@@ -61,7 +64,10 @@ int			main(int argc, char **argv)
 
 	while (argv[1][i])
 		i++;
-	if (argc != 2)
+	error = (argc != 2);
+	if (!error)
+		ret = rpn_calc(argv[1], 0);
+	if (error)
 		return (printf("Error\n"));
-	ret = rpn_calc(argv[1], 0);
+	return (printf("%d\n", ret));
 }
