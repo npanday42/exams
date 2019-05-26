@@ -6,7 +6,7 @@
 /*   By: npanday <npanday@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/20 16:52:11 by npanday        #+#    #+#                */
-/*   Updated: 2019/05/24 21:54:42 by npanday       ########   odam.nl         */
+/*   Updated: 2019/05/26 22:38:27 by npanday       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,21 @@
 
 static int	i;
 
-static char	error = 0;
+static char	error;
 
-static int	rpn_calc(char *str);
+static char *str;
+
+static int	rpn_calc(void);
 
 static int	ft_isdigit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-static int	process(char *str, char c)
+static int	process(char c)
 {
-	int		b = rpn_calc(str);
-	int		a = rpn_calc(str);
+	int		b = rpn_calc();
+	int		a = rpn_calc();
 
 	if (c == '+')
 		return (a + b);
@@ -43,7 +45,7 @@ static int	process(char *str, char c)
 	return (1);
 }
 
-static int	rpn_calc(char *str)
+static int	rpn_calc(void)
 {
 	char	num = 0;
 
@@ -54,11 +56,12 @@ static int	rpn_calc(char *str)
 		i--;
 		if (ft_isdigit(str[i]))
 			num = 1;
-		else if (str[i] == ' ')
-			if (num)
-				return (atoi(str + i + 1));
-		else
-			return (process(str, str[i--]));
+		else if (i == 0)
+			error = 1;
+		else if (str[i] != ' ')
+			return (process(str[i--]));
+		else if (num)
+			return (atoi(str + i + 1));
 	}
 	return (error ? 1 : atoi(str + i));
 }
@@ -69,10 +72,12 @@ int			main(int argc, char **argv)
 
 	if (argc != 2)
 		return (printf("Error\n"));
+	str = argv[1];
 	i = 0;
-	while (argv[1][i])
+	while (str[i])
 		i++;
-	ret = rpn_calc(argv[1]);
+	error = 0;
+	ret = rpn_calc();
 	if (error || i != 0)
 		return (printf("Error\n"));
 	return (printf("%d\n", ret));
