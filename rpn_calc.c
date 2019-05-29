@@ -6,7 +6,7 @@
 /*   By: npanday <npanday@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/20 16:52:11 by npanday        #+#    #+#                */
-/*   Updated: 2019/05/26 23:29:38 by npanday       ########   odam.nl         */
+/*   Updated: 2019/05/29 13:05:59 by npanday       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ int			main(int argc, char **argv)
 
 	if (argc != 2)
 		return (printf("Error\n"));
-	str = argv[1];
 	i = 0;
-	while (str[i])
+	while (argv[1][i])
 		i++;
+	str = argv[1];
 	error = 0;
 	ret = rpn_calc();
 	if (error || i != 0)
