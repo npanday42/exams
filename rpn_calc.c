@@ -6,7 +6,7 @@
 /*   By: npanday <npanday@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/20 16:52:11 by npanday        #+#    #+#                */
-/*   Updated: 2019/05/29 13:05:59 by npanday       ########   odam.nl         */
+/*   Updated: 2019/06/01 20:27:50 by npanday       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,9 @@ int			main(int argc, char **argv)
 	while (argv[1][i])
 		i++;
 	str = argv[1];
-	error = 0;
-	ret = rpn_calc();
+	error = (str[i - 1] == ' ');
+	if (!error)
+		ret = rpn_calc();
 	if (error || i != 0)
 		return (printf("Error\n"));
 	return (printf("%d\n", ret));
