@@ -6,7 +6,7 @@
 /*   By: exam <marvin@codam.nl>                       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2018/10/19 15:20:24 by exam           #+#    #+#                */
-/*   Updated: 2019/06/01 20:49:43 by npanday       ########   odam.nl         */
+/*   Updated: 2019/06/01 23:57:47 by npanday       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,8 @@ static int	brainfuck(char *str, char *ptr, char end)
 int			main(int argc, char **argv)
 {
 	char	arr[2048] = {0};
-	char	*ptr;
 
-	ptr = arr;
 	if (argc == 2)
-		brainfuck(argv[1], ptr, '\0');
+		brainfuck(argv[1], arr, '\0');
 	return (0);
 }
