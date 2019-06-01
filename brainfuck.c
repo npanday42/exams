@@ -6,7 +6,7 @@
 /*   By: exam <marvin@codam.nl>                       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2018/10/19 15:20:24 by exam           #+#    #+#                */
-/*   Updated: 2019/05/30 19:16:27 by npanday       ########   odam.nl         */
+/*   Updated: 2019/06/01 20:49:43 by npanday       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static int	loop(char *str, char *ptr, int i)
 	if (*ptr == 0)
 		while (loops > 0)
 		{
-			i++;
-			if (str[i] == '[')
+			ret++;
+			if (str[i + ret] == '[')
 				loops++;
-			else if (str[i] == ']')
+			else if (str[i + ret] == ']')
 				loops--;
 		}
 	else while (*ptr != 0)
@@ -34,18 +34,18 @@ static int	loop(char *str, char *ptr, int i)
 	return (ret);
 }
 
-static void	process(char *ptr, char op)
+static void	process(char **ptr, char op)
 {
 	if (op == '>')
-		ptr++;
-	else if (op == '<')
-		ptr--;
-	else if (op == '+')
 		(*ptr)++;
-	else if (op == '-')
+	else if (op == '<')
 		(*ptr)--;
+	else if (op == '+')
+		(**ptr)++;
+	else if (op == '-')
+		(**ptr)--;
 	else if (op == '.')
-		write(1, ptr, 1);
+		write(1, *ptr, 1);
 }
 
 static int	brainfuck(char *str, char *ptr, char end)
@@ -58,7 +58,7 @@ static int	brainfuck(char *str, char *ptr, char end)
 		if (str[i] == '[')
 			i += loop(str, ptr, i);
 		else
-			process(ptr, str[i]);
+			process(&ptr, str[i]);
 		i++;
 	}
 	return (i);
