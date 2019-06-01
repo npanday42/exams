@@ -3,7 +3,7 @@
 
 typedef unsigned char t_byte;
 
-static int	ft_isprint(char c)
+static int	isprint(char c)
 {
 	return (c >= 32 && c <= 126);
 }
@@ -17,7 +17,7 @@ static void	print_chars(const void *addr, size_t size)
 	i = 0;
 	while (i < size)
 	{
-		if (ft_isprint(str[i]))
+		if (isprint(str[i]))
 			write(1, str + i, 1);
 		else
 			write(1, ".", 1);
