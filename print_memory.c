@@ -3,16 +3,21 @@
 
 typedef unsigned char t_byte;
 
+static int	ft_isprint(char c)
+{
+	return (c >= 32 && c <= 126);
+}
+
 static void	print_chars(const void *addr, size_t size)
 {
-	char	*str;
-	size_t	i;
+	const char	*str;
+	size_t		i;
 
-	str = (char *)addr;
+	str = addr;
 	i = 0;
 	while (i < size)
 	{
-		if (str[i] >= 32 && str[i] <= 126)
+		if (ft_isprint(str[i]))
 			write(1, str + i, 1);
 		else
 			write(1, ".", 1);
@@ -22,10 +27,10 @@ static void	print_chars(const void *addr, size_t size)
 
 static void	print_hex(const void *addr, size_t size)
 {
-	t_byte	*str;
-	size_t	i;
+	const t_byte	*str;
+	size_t			i;
 
-	str = (t_byte *)addr;
+	str = addr;
 	i = 0;
 	while (i < size)
 	{
@@ -63,10 +68,7 @@ static void	print_memory(const void *addr, size_t size)
 int			main(void)
 {
 	int		tab[10] = {0, 23, 150, 255, 12, 16, 42, 103};
-	char	chars[] = "Hello, World!";
 
 	print_memory(tab, sizeof(tab));
-	write(1, "\n", 1);
-	print_memory(chars, sizeof(chars) - 1);
 	return (1);
 }
