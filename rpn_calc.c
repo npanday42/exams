@@ -6,7 +6,7 @@
 /*   By: npanday <npanday@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/20 16:52:11 by npanday        #+#    #+#                */
-/*   Updated: 2019/06/01 20:27:50 by npanday       ########   odam.nl         */
+/*   Updated: 2019/06/09 17:20:57 by npanday       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static char	error;
 
 static char *str;
 
-static int	rpn_calc(void);
-
 static int	ft_isdigit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
+
+static int	rpn_calc(void);
 
 static int	process(char c)
 {
@@ -71,13 +71,14 @@ int			main(int argc, char **argv)
 
 	if (argc != 2)
 		return (printf("Error\n"));
-	i = 0;
-	while (argv[1][i])
-		i++;
 	str = argv[1];
-	error = (str[i - 1] == ' ');
-	if (!error)
-		ret = rpn_calc();
+	i = 0;
+	while (str[i])
+		i++;
+	if (str[i - 1] == ' ')
+		return (printf("Error\n"));
+	error = 0;
+	ret = rpn_calc();
 	if (error || i != 0)
 		return (printf("Error\n"));
 	return (printf("%d\n", ret));
