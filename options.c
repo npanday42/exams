@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   options.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: npanday <npanday@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/06/09 17:05:44 by npanday        #+#    #+#                */
+/*   Updated: 2019/06/09 17:09:34 by npanday       ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-void	print_options(unsigned int *options)
+static void	print_options(unsigned int *options)
 {
 	int		i;
 	char	c;
@@ -17,7 +29,7 @@ void	print_options(unsigned int *options)
 	write(1, "\n", 1);
 }
 
-int		options(char *str, unsigned int *opt)
+static int	options(char *str, unsigned int *opt)
 {
 	int			i;
 	char		c;
@@ -37,7 +49,7 @@ int		options(char *str, unsigned int *opt)
 	return (1);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	unsigned int	opt;
 	int				ret;

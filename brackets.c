@@ -6,13 +6,13 @@
 /*   By: npanday <npanday@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/20 16:56:32 by npanday        #+#    #+#                */
-/*   Updated: 2019/05/20 16:56:34 by npanday       ########   odam.nl         */
+/*   Updated: 2019/06/09 17:09:55 by npanday       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-static int		brackets(char *str, char end)
+static int	brackets(char *str, char end)
 {
 	static int	i;
 	int			j;
@@ -37,7 +37,7 @@ static int		brackets(char *str, char end)
 	return (1);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	int		i = 1;
 
